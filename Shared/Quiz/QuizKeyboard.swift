@@ -74,7 +74,7 @@ private struct QuizKeyboardButton: View {
     .font(.title)
     .background(
       RoundedRectangle(cornerRadius: 10, style: .continuous)
-        .fill(Color(.systemGray6))
+        .fill(Color.appLightGrey)
     )
     
   }
