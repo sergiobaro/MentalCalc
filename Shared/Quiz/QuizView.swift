@@ -6,6 +6,7 @@ struct QuizView: View {
 
   var body: some View {
     VStack {
+      Spacer()
 
       QuizScoreView(correct: $controller.correct, attemps: $controller.attemps)
 
@@ -24,6 +25,7 @@ struct QuizView: View {
       .padding(.top, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
 
       HStack {
+        Spacer()
         Button("Solve") {
           self.controller.solve()
         }
@@ -32,13 +34,19 @@ struct QuizView: View {
           self.controller.next()
         }
         .disabled(controller.nextDisabled)
-        Spacer()
+      }
+      .padding(.vertical, 10)
+
+      Spacer()
+
+      HStack {
         Button("Check") {
           self.controller.check()
         }
+        .font(.title)
         .disabled(controller.checkDisabled)
       }
-      .padding(.vertical, 10)
+      .padding(.bottom, 20)
     }
     .padding(.horizontal, 50)
   }
@@ -46,6 +54,9 @@ struct QuizView: View {
 
 struct QuizView_Previews: PreviewProvider {
   static var previews: some View {
-    QuizView()
+    Group {
+      QuizView()
+      QuizView()
+    }
   }
 }
