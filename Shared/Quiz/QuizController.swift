@@ -59,3 +59,15 @@ class QuizController: ObservableObject {
     next()
   }
 }
+
+extension QuizController: QuizKeyboardController {
+
+  func input(option: QuizKeyboardOption) {
+    switch option {
+    case let .number(number):
+      inputText += String(number)
+    case .delete:
+      inputText = String(inputText.dropLast())
+    }
+  }
+}
