@@ -18,7 +18,10 @@ class QuizController: ObservableObject {
   init(generator: QuizGenerator) {
     self.generator = generator
     self.currentQuestion = generator.generate()
-    next()
+  }
+
+  func onAppear() {
+    reset()
   }
 
   func next() {

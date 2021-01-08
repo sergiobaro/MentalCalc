@@ -43,24 +43,24 @@ struct SimpleQuizGenerator: QuizGenerator {
 
   func generate() -> QuizQuestion {
     QuizQuestion(
-      left: Int.random(in: 1...12),
-      right: Int.random(in: 1...12)
+      left: Int.random(in: 1...Constants.maxNumber),
+      right: Int.random(in: 1...Constants.maxNumber)
     )
   }
 }
 
 struct SelectionTableQuizGenerator: QuizGenerator {
 
-  private let numbers: [Int]
+  private let numbers: Set<Int>
 
-  init(numbers: Int...) {
+  init(numbers: Set<Int>) {
     self.numbers = numbers
   }
 
   func generate() -> QuizQuestion {
     QuizQuestion(
-      left: numbers.randomElement() ?? Int.random(in: 1...12),
-      right: Int.random(in: 1...12)
+      left: numbers.randomElement() ?? Int.random(in: 1...Constants.maxNumber),
+      right: Int.random(in: 1...Constants.maxNumber)
     )
   }
 }
@@ -76,7 +76,7 @@ struct MultiplicationTableQuizGenerator: QuizGenerator {
   func generate() -> QuizQuestion {
     QuizQuestion(
       left: number,
-      right: Int.random(in: 1...12)
+      right: Int.random(in: 1...Constants.maxNumber)
     )
   }
 }

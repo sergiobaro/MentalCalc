@@ -7,14 +7,29 @@ struct MainOption: Identifiable {
   }
 
   let title: String
-  let generator: QuizGenerator
+  let number: Int
 }
 
 class MainController: ObservableObject {
 
   @Published var options: [MainOption]
+  @Published var generator: QuizGenerator = SimpleQuizGenerator()
+  @Published var startDisabled = true
+
+  private var selectedNumbers = Set<Int>()
 
   init() {
-    options = (1...12).map { MainOption(title: "Practice Times Table \($0)", generator: MultiplicationTableQuizGenerator(number: $0)) }
+    options = (1...Constants.maxNumber).map { MainOption(title: "\($0)", number: $0) }
+  }
+
+  func select(option: MainOption) {
+    if selectedNumbers.contains(option.number) {
+      selectedNumbers.remove(option.number)
+    } else {
+      selectedNumbers.insert(option.number)
+    }
+    generator = SelectionTableQuizGenerator(numbers: selectedNumbers)
+
+    startDisabled = selectedNumbers.isEmpty
   }
 }

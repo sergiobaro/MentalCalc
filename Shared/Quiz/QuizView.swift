@@ -45,6 +45,9 @@ struct QuizView: View {
       QuizKeyboard(controller: controller)
         .frame(maxHeight: 300)
     }
+    .onAppear(perform: {
+      self.controller.onAppear()
+    })
   }
 }
 
