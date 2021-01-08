@@ -13,6 +13,13 @@ struct MainView: View {
   var body: some View {
     NavigationView {
       VStack {
+        HStack {
+          Text("Select tables:")
+          Spacer()
+        }
+        .padding(.top, 20)
+        .padding(.horizontal, 20)
+
         LazyVGrid(columns: columns, spacing: 10) {
           ForEach(controller.options) { option in
             SelectableButtonView(action: {
@@ -22,15 +29,16 @@ struct MainView: View {
             }
           }
         }
-        .padding()
+        .padding(.horizontal, 20)
 
         NavigationLink(
           destination: QuizView(controller: QuizController(generator: controller.generator)),
           label: {
-            Text("Start")
+            Text("Practice")
               .font(.title)
           })
           .disabled(controller.startDisabled)
+          .padding(20)
 
         Spacer()
       }

@@ -5,12 +5,10 @@ class QuizController: ObservableObject {
 
   @Published var questionText: String = ""
   @Published var inputText: String = ""
+  @Published var solutionText: String = "Show Solution"
   @Published var borderColor: Color = .black
   @Published var correct: Int = 0
   @Published var attemps: Int = 0
-  @Published var solveDisabled: Bool = false
-  @Published var nextDisabled: Bool = true
-  @Published var checkDisabled: Bool = false
 
   private let generator: QuizGenerator
   private var currentQuestion: QuizQuestion
@@ -27,12 +25,9 @@ class QuizController: ObservableObject {
   func next() {
     borderColor = .black
     inputText = ""
+    solutionText = "Show Solution"
     currentQuestion = generator.generate(previous: currentQuestion)
     questionText = currentQuestion.questionText
-
-    checkDisabled = false
-    nextDisabled = true
-    solveDisabled = false
   }
 
   func check() {
@@ -41,16 +36,13 @@ class QuizController: ObservableObject {
       correct += 1
       next()
     } else {
-      self.borderColor = .red
+      borderColor = .red
     }
   }
 
-  func solve() {
+  func showSolution() {
     attemps += 1
-    inputText = "\(currentQuestion.result)"
-    checkDisabled = true
-    nextDisabled = false
-    solveDisabled = true
+    solutionText = "\(currentQuestion.result)"
   }
 
   func reset() {

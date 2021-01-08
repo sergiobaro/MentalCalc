@@ -29,15 +29,10 @@ struct QuizView: View {
       Spacer()
 
       HStack {
-        Spacer()
-        Button("Solve") {
-          self.controller.solve()
-        }
-        .disabled(controller.solveDisabled)
-        Button("Next") {
-          self.controller.next()
-        }
-        .disabled(controller.nextDisabled)
+        Text(self.controller.solutionText)
+          .onTapGesture {
+            self.controller.showSolution()
+          }
       }
       .padding(.vertical, 10)
       .padding(.horizontal, 20)
