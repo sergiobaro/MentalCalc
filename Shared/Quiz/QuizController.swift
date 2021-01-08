@@ -63,6 +63,8 @@ extension QuizController: QuizKeyboardController {
     switch option {
     case let .number(number):
       inputText += String(number)
+    case .check:
+      check()
     case .delete:
       inputText = String(inputText.dropLast())
     }

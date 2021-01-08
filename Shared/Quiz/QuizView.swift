@@ -26,6 +26,8 @@ struct QuizView: View {
       }
       .padding(.horizontal, 20)
 
+      Spacer()
+
       HStack {
         Spacer()
         Button("Solve") {
@@ -39,16 +41,6 @@ struct QuizView: View {
       }
       .padding(.vertical, 10)
       .padding(.horizontal, 20)
-
-      Spacer()
-
-      HStack {
-        Button("Check") {
-          self.controller.check()
-        }
-        .font(.title)
-        .disabled(controller.checkDisabled)
-      }
 
       QuizKeyboard(controller: controller)
         .frame(maxHeight: 300)
