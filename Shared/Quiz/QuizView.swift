@@ -2,7 +2,7 @@ import SwiftUI
 
 struct QuizView: View {
 
-  @ObservedObject var controller = QuizController()
+  @ObservedObject var controller: QuizController
 
   var body: some View {
     VStack {
@@ -12,7 +12,7 @@ struct QuizView: View {
       Spacer()
 
       HStack {
-        Text(controller.text)
+        Text(controller.questionText)
           .font(.title)
           .frame(minWidth: 100)
         Text(controller.inputText)
@@ -59,7 +59,7 @@ struct QuizView: View {
 struct QuizView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
-      QuizView()
+      QuizView(controller: QuizController(generator: SimpleQuizGenerator()))
     }
   }
 }

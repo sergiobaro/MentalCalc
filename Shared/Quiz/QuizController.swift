@@ -3,7 +3,7 @@ import SwiftUI
 
 class QuizController: ObservableObject {
 
-  @Published var text: String = "7 x 7 ="
+  @Published var questionText: String = ""
   @Published var inputText: String = ""
   @Published var borderColor: Color = .black
   @Published var correct: Int = 0
@@ -12,24 +12,21 @@ class QuizController: ObservableObject {
   @Published var nextDisabled: Bool = true
   @Published var checkDisabled: Bool = false
 
-  private var result: Int = 0
+  private let generator: QuizGenerator
+  private var currentQuestion: QuizQuestion
 
-  init() {
+  init(generator: QuizGenerator) {
+    self.generator = generator
+    self.currentQuestion = generator.generate()
     next()
   }
 
-  private func generate() {
-    let left = Int.random(in: 1...9)
-    let right = Int.random(in: 1...9)
-    self.result = left * right
-
-    self.text = "\(left) x \(right) ="
-  }
-
   func next() {
-    self.borderColor = .black
-    self.inputText = ""
-    generate()
+    borderColor = .black
+    inputText = ""
+    currentQuestion = generator.generate(previous: currentQuestion)
+    questionText = currentQuestion.questionText
+
     checkDisabled = false
     nextDisabled = true
     solveDisabled = false
@@ -37,7 +34,7 @@ class QuizController: ObservableObject {
 
   func check() {
     attemps += 1
-    if result == Int(inputText) {
+    if currentQuestion.result == Int(inputText) {
       correct += 1
       next()
     } else {
@@ -47,7 +44,7 @@ class QuizController: ObservableObject {
 
   func solve() {
     attemps += 1
-    inputText = "\(result)"
+    inputText = "\(currentQuestion.result)"
     checkDisabled = true
     nextDisabled = false
     solveDisabled = true
