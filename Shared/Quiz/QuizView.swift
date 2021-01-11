@@ -1,4 +1,5 @@
 import SwiftUI
+import Generators
 
 struct QuizView: View {
 
@@ -49,7 +50,7 @@ struct QuizView: View {
 struct QuizView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
-      QuizView(controller: QuizController(generator: SimpleQuizGenerator()))
+      QuizView(controller: QuizController(generator: SimpleQuizGenerator(maxNumber: Constants.maxNumber)))
     }
   }
 }

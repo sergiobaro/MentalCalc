@@ -1,5 +1,6 @@
 import Combine
 import SwiftUI
+import Generators
 
 class QuizController: ObservableObject {
 

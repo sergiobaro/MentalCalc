@@ -1,4 +1,5 @@
 import Foundation
+import Generators
 
 struct MainOption: Identifiable {
 
@@ -13,7 +14,7 @@ struct MainOption: Identifiable {
 class MainController: ObservableObject {
 
   @Published var options: [MainOption]
-  @Published var generator: QuizGenerator = SimpleQuizGenerator()
+  @Published var generator: QuizGenerator = SimpleQuizGenerator(maxNumber: Constants.maxNumber)
 
   private var selectedNumbers = Set<Int>()
 
@@ -29,9 +30,9 @@ class MainController: ObservableObject {
     }
 
     if selectedNumbers.isEmpty {
-      generator = SimpleQuizGenerator()
+      generator = SimpleQuizGenerator(maxNumber: Constants.maxNumber)
     } else {
-      generator = SelectionTableQuizGenerator(numbers: selectedNumbers)
+      generator = SelectionTableQuizGenerator(maxNumber: Constants.maxNumber, numbers: selectedNumbers)
     }
   }
 }

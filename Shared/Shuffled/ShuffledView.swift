@@ -1,4 +1,5 @@
 import SwiftUI
+import Generators
 
 struct ShuffledView: View {
 
@@ -32,7 +33,14 @@ struct ShuffledView: View {
 struct ShuffledView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      ShuffledView(controller: ShuffledController(generator: SelectionTableQuizGenerator(numbers: Set<Int>(arrayLiteral: 1))))
+      ShuffledView(
+        controller: ShuffledController(
+          generator: SelectionTableQuizGenerator(
+            maxNumber: Constants.maxNumber,
+            numbers: Set<Int>(arrayLiteral: 1)
+          )
+        )
+      )
     }
   }
 }
