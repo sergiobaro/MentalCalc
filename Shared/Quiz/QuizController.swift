@@ -8,7 +8,7 @@ class QuizController: ObservableObject {
   @Published var solutionText: String = "Show Solution"
   @Published var borderColor: Color = .black
   @Published var correct: Int = 0
-  @Published var attemps: Int = 0
+  @Published var errors: Int = 0
 
   private let generator: QuizGenerator
   private var currentQuestion: QuizQuestion
@@ -31,23 +31,23 @@ class QuizController: ObservableObject {
   }
 
   func check() {
-    attemps += 1
     if currentQuestion.result == Int(inputText) {
       correct += 1
       next()
     } else {
+      errors += 1
       borderColor = .red
     }
   }
 
   func showSolution() {
-    attemps += 1
+    errors += 1
     solutionText = "\(currentQuestion.result)"
   }
 
   func reset() {
     correct = 0
-    attemps = 0
+    errors = 0
     next()
   }
 }

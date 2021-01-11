@@ -3,7 +3,7 @@ import SwiftUI
 struct QuizScoreView: View {
 
   @Binding var correct: Int
-  @Binding var attemps: Int
+  @Binding var errors: Int
 
   var body: some View {
     HStack {
@@ -14,9 +14,9 @@ struct QuizScoreView: View {
           .font(.title)
       }
       VStack {
-        Text("Attempts:")
+        Text("Errors:")
           .font(.caption)
-        Text("\(attemps)")
+        Text("\(errors)")
           .font(.title)
       }
     }
@@ -25,6 +25,6 @@ struct QuizScoreView: View {
 
 struct QuizScoreView_Previews: PreviewProvider {
   static var previews: some View {
-    QuizScoreView(correct: .constant(99), attemps: .constant(99))
+    QuizScoreView(correct: .constant(99), errors: .constant(99))
   }
 }

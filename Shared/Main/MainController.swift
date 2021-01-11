@@ -14,7 +14,6 @@ class MainController: ObservableObject {
 
   @Published var options: [MainOption]
   @Published var generator: QuizGenerator = SimpleQuizGenerator()
-  @Published var startDisabled = true
 
   private var selectedNumbers = Set<Int>()
 
@@ -28,8 +27,11 @@ class MainController: ObservableObject {
     } else {
       selectedNumbers.insert(option.number)
     }
-    generator = SelectionTableQuizGenerator(numbers: selectedNumbers)
 
-    startDisabled = selectedNumbers.isEmpty
+    if selectedNumbers.isEmpty {
+      generator = SimpleQuizGenerator()
+    } else {
+      generator = SelectionTableQuizGenerator(numbers: selectedNumbers)
+    }
   }
 }

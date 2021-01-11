@@ -7,7 +7,7 @@ struct QuizView: View {
   var body: some View {
     VStack {
       Spacer()
-      QuizScoreView(correct: $controller.correct, attemps: $controller.attemps)
+      QuizScoreView(correct: $controller.correct, errors: $controller.errors)
         .padding(.vertical, 10)
       Spacer()
 
