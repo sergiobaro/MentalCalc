@@ -34,11 +34,17 @@ struct MainView: View {
         NavigationLink(
           destination: QuizView(controller: QuizController(generator: controller.generator)),
           label: {
-            Text("Practice")
+            Text("Random")
               .font(.title)
           })
           .disabled(controller.startDisabled)
           .padding(20)
+
+        NavigationLink(
+          destination: ShuffledView(controller: ShuffledController(generator: controller.generator)),
+          label: {
+            Text("Shuffled")
+          })
 
         Spacer()
       }
