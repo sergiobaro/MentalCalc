@@ -12,6 +12,11 @@ public struct QuizQuestion {
   public var questionText: String {
     "\(left) x \(right) ="
   }
+
+  public init(left: Int, right: Int) {
+    self.left = left
+    self.right = right
+  }
 }
 
 extension QuizQuestion: Equatable {

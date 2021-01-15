@@ -53,6 +53,16 @@ struct MainView: View {
             .disabled(controller.shuffledDisabled)
 
           Spacer()
+
+          NavigationLink(
+            destination: MultiplyTableView(controller: MultiplyTableController(generator: controller.generator)),
+            label: {
+              Text("Table")
+                .font(.title)
+            })
+            .disabled(controller.tableDisabled)
+
+          Spacer()
         }
         .padding()
 

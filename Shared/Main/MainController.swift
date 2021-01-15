@@ -17,6 +17,7 @@ class MainController: ObservableObject {
   @Published var generator: QuizGenerator = SimpleQuizGenerator(maxNumber: Constants.maxNumber)
   @Published var quizDisabled = true
   @Published var shuffledDisabled = true
+  @Published var tableDisabled = true
 
   private var selectedNumbers = Set<Int>()
 
@@ -36,12 +37,15 @@ class MainController: ObservableObject {
     case 0:
       quizDisabled = true
       shuffledDisabled = true
+      tableDisabled = true
     case 1:
       quizDisabled = false
       shuffledDisabled = false
+      tableDisabled = false
     default:
       quizDisabled = false
       shuffledDisabled = true
+      tableDisabled = true
     }
   }
 }
