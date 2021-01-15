@@ -12,12 +12,14 @@ struct QuizScoreView: View {
           .font(.caption)
         Text("\(correct)")
           .font(.title)
+          .foregroundColor(.green)
       }
       VStack {
         Text("Errors:")
           .font(.caption)
         Text("\(errors)")
           .font(.title)
+          .foregroundColor(.red)
       }
     }
   }
