@@ -44,7 +44,7 @@ extension QuizGenerator {
 
   public func generate(previous: QuizQuestion) -> QuizQuestion {
     var next = generate()
-    while (next == previous) {
+    while next == previous {
       next = generate()
     }
 

@@ -86,7 +86,6 @@ private struct QuizKeyboardButton: View {
       RoundedRectangle(cornerRadius: 10, style: .continuous)
         .fill(option.color)
     )
-    
   }
 }
 
