@@ -15,6 +15,8 @@ class MainController: ObservableObject {
 
   @Published var options: [MainOption]
   @Published var generator: QuizGenerator = SimpleQuizGenerator(maxNumber: Constants.maxNumber)
+  @Published var quizDisabled = true
+  @Published var shuffledDisabled = true
 
   private var selectedNumbers = Set<Int>()
 
@@ -28,11 +30,18 @@ class MainController: ObservableObject {
     } else {
       selectedNumbers.insert(option.number)
     }
+    generator = SelectionTableQuizGenerator(maxNumber: Constants.maxNumber, numbers: selectedNumbers)
 
-    if selectedNumbers.isEmpty {
-      generator = SimpleQuizGenerator(maxNumber: Constants.maxNumber)
-    } else {
-      generator = SelectionTableQuizGenerator(maxNumber: Constants.maxNumber, numbers: selectedNumbers)
+    switch selectedNumbers.count {
+    case 0:
+      quizDisabled = true
+      shuffledDisabled = true
+    case 1:
+      quizDisabled = false
+      shuffledDisabled = false
+    default:
+      quizDisabled = false
+      shuffledDisabled = true
     }
   }
 }

@@ -40,6 +40,7 @@ struct MainView: View {
               Text("Quiz")
                 .font(.title)
             })
+            .disabled(controller.quizDisabled)
 
           Spacer()
 
@@ -49,6 +50,7 @@ struct MainView: View {
               Text("Shuffled")
                 .font(.title)
             })
+            .disabled(controller.shuffledDisabled)
 
           Spacer()
         }
