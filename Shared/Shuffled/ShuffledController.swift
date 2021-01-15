@@ -16,31 +16,32 @@ struct ShuffledQuestion: Identifiable {
 
 class ShuffledController: ObservableObject {
 
-  private let quizQuestions: [QuizQuestion]
-  private var focusedQuestionIndex: Int
-  @Published var questions: [ShuffledQuestion]
+  private let generator: QuizGenerator
+  private var quizQuestions = [QuizQuestion]()
+  private var focusedQuestionIndex = 0
+  @Published var questions = [ShuffledQuestion]()
 
   init(generator: QuizGenerator) {
+    self.generator = generator
+  }
+
+  func onAppear() {
     self.quizQuestions = generator.generateAll().shuffled()
-
-    var isFirst = true
-    self.questions = quizQuestions.map { question -> ShuffledQuestion in
-      if isFirst {
-        isFirst = false
-        return ShuffledQuestion(question: question, borderWidth: 2, borderColor: .black, inputText: "")
-      } else {
-        return ShuffledQuestion(question: question, borderWidth: 1, borderColor: .black, inputText: "")
-      }
-    }
-
     self.focusedQuestionIndex = 0
+    self.questions = quizQuestions.enumerated().map { (index, question) -> ShuffledQuestion in
+      let isFocused = (index == 0)
+      return ShuffledQuestion(question: question,
+                              borderWidth: isFocused ? 2 : 1,
+                              borderColor: .black,
+                              inputText: "")
+    }
   }
 
   func focus(on focusedQuestion: ShuffledQuestion) {
-    self.questions = questions.enumerated().map { (index, question) in
+    questions = questions.enumerated().map { (index, question) in
       let isFocused = question.id == focusedQuestion.id
       if isFocused {
-        self.focusedQuestionIndex = index
+        focusedQuestionIndex = index
       }
       return ShuffledQuestion(question: question.question,
                               borderWidth: isFocused ? 2 : 1,
@@ -48,44 +49,29 @@ class ShuffledController: ObservableObject {
                               inputText: question.inputText)
     }
   }
-}
 
-extension ShuffledController: QuizKeyboardController {
-
-  func input(option: QuizKeyboardOption) {
-    if case QuizKeyboardOption.check = option {
-      if focusedQuestionIndex == questions.count - 1 {
-        // SBS: focusOnFirtEmpty() ?
-        check()
-      } else {
-        focusOnNextQuestion()
-      }
-      return
+  private func check() {
+    if let question = findNextNotAnsweredQuestion() {
+      focus(on: question)
+    } else {
+      checkAnswers()
     }
+  }
 
-    self.questions = questions.enumerated().map { (index, question) in
-      let isFocused = index == self.focusedQuestionIndex
-      let newInputText: String
-      if isFocused {
-        newInputText = self.calculateInputText(question, keyboardOption: option)
-      } else {
-        newInputText = question.inputText
-      }
+  private func findNextNotAnsweredQuestion() -> ShuffledQuestion? {
+    questions.first(where: { $0.inputText.isEmpty })
+  }
+
+  private func checkAnswers() {
+    questions = questions.enumerated().map { (index, question) in
+      let isFocused = (index == focusedQuestionIndex)
+      let isCorrect = Int(question.inputText) == question.question.result
 
       return ShuffledQuestion(question: question.question,
                               borderWidth: isFocused ? 2 : 1,
-                              borderColor: .black,
-                              inputText: newInputText)
+                              borderColor: isCorrect ? .green : .red,
+                              inputText: question.inputText)
     }
-  }
-
-  private func check() {
-    // SBS
-  }
-
-  private func focusOnNextQuestion() {
-    let question = self.questions[focusedQuestionIndex + 1]
-    self.focus(on: question)
   }
 
   private func calculateInputText(_ question: ShuffledQuestion, keyboardOption: QuizKeyboardOption) -> String {
@@ -100,5 +86,35 @@ extension ShuffledController: QuizKeyboardController {
       inputText = String(inputText.dropLast())
     }
     return inputText
+  }
+
+  private func mapQuestions(with option: QuizKeyboardOption) {
+    self.questions = questions.enumerated().map { (index, question) in
+      let isFocused = (index == focusedQuestionIndex)
+
+      let newInputText: String
+      if isFocused {
+        newInputText = calculateInputText(question, keyboardOption: option)
+      } else {
+        newInputText = question.inputText
+      }
+
+      return ShuffledQuestion(question: question.question,
+                              borderWidth: isFocused ? 2 : 1,
+                              borderColor: .black,
+                              inputText: newInputText)
+    }
+  }
+}
+
+extension ShuffledController: QuizKeyboardController {
+
+  func input(option: QuizKeyboardOption) {
+    switch option {
+    case .check:
+      check()
+    default:
+      mapQuestions(with: option)
+    }
   }
 }
