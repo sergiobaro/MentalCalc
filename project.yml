@@ -1,0 +1,35 @@
+name: MentalCalc
+targets:
+  MentalCalc:
+    platform: iOS
+    type: application
+    sources:
+      - MentalCalc/
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.sbs.MentalCalc
+    dependencies:
+      - target: Multiplication
+    scheme:
+      testTargets:
+        - MultiplicationTests
+  Multiplication:
+    platform: iOS
+    type: framework
+    sources: 
+      - Multiplication/
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.sbs.Multiplication
+    scheme:
+      testTargets:
+        - MultiplicationTests
+  MultiplicationTests:
+    platform: iOS
+    type: bundle.unit-test
+    sources: 
+      - MultiplicationTests/
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.sbs.MultiplicationTests
+    dependencies:
+      - target: MultiplicationTests
+    scheme:
+      gatherCoverageData: true
