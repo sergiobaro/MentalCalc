@@ -1,7 +1,6 @@
 import Foundation
-import Generators
 
-class MultiplyTableController: ObservableObject {
+class TableController: ObservableObject {
 
   private let generator: QuizGenerator
   @Published var questions: [String]

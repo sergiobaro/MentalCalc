@@ -4,7 +4,7 @@ import SwiftUI
 struct MentalCalcApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      MentalCalcView()
     }
   }
 }

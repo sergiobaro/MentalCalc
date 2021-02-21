@@ -1,5 +1,5 @@
 import XCTest
-@testable import Generators
+@testable import Multiplication
 
 class GeneratorsTests: XCTestCase {
 
@@ -9,9 +9,8 @@ class GeneratorsTests: XCTestCase {
 
     XCTAssertEqual(questions.count, 24)
 
-    var idsSet = Set<Int>()
-    questions.forEach { idsSet.insert($0.id) }
-    XCTAssertEqual(idsSet.count, 24)
+    let ids = questions.reduce(into: Set<Int>()) { $0.insert($1.id) }
+    XCTAssertEqual(ids.count, 24)
   }
 
   func test_randomNumbersOnTheLeft() {

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MainView: View {
+public struct MainView: View {
 
   @ObservedObject var controller: MainController
 
@@ -10,7 +10,11 @@ struct MainView: View {
     GridItem(.flexible()),
   ]
 
-  var body: some View {
+  public init() {
+    self.controller = MainController()
+  }
+
+  public var body: some View {
     NavigationView {
       VStack {
         HStack {
@@ -55,7 +59,7 @@ struct MainView: View {
           Spacer()
 
           NavigationLink(
-            destination: MultiplyTableView(controller: MultiplyTableController(generator: controller.generator)),
+            destination: TableView(controller: TableController(generator: controller.generator)),
             label: {
               Text("Table")
                 .font(.title)
@@ -75,6 +79,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
   static var previews: some View {
-    MainView(controller: MainController())
+    MainView()
   }
 }

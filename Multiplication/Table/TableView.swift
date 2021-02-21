@@ -1,9 +1,8 @@
 import SwiftUI
-import Generators
 
-struct MultiplyTableView: View {
+struct TableView: View {
 
-  @ObservedObject var controller: MultiplyTableController
+  @ObservedObject var controller: TableController
   private let columns = [
     GridItem(.flexible()),
     GridItem(.flexible()),
@@ -33,11 +32,11 @@ struct MultiplyTableView: View {
   }
 }
 
-struct MultiplyTableView_Previews: PreviewProvider {
+struct MultiplicationTableView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      MultiplyTableView(
-        controller: MultiplyTableController(
+      TableView(
+        controller: TableController(
           generator: SelectionTableQuizGenerator(maxNumber: Constants.maxNumber, numbers: Set<Int>(arrayLiteral: 12))
         )
       )

@@ -1,5 +1,4 @@
 import Foundation
-import Generators
 
 struct MainOption: Identifiable {
 
