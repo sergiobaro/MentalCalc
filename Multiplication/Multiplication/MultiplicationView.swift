@@ -1,8 +1,8 @@
 import SwiftUI
 
-public struct MainView: View {
+public struct MultiplicationView: View {
 
-  @ObservedObject var controller: MainController
+  @ObservedObject var controller: MultiplicationController
 
   private let columns = [
     GridItem(.flexible()),
@@ -11,7 +11,7 @@ public struct MainView: View {
   ]
 
   public init() {
-    self.controller = MainController()
+    self.controller = MultiplicationController()
   }
 
   public var body: some View {
@@ -72,13 +72,13 @@ public struct MainView: View {
 
         Spacer()
       }
-      .navigationTitle("Mental Calc")
+      .navigationTitle("Multiplication")
     }
   }
 }
 
 struct MainView_Previews: PreviewProvider {
   static var previews: some View {
-    MainView()
+    MultiplicationView()
   }
 }

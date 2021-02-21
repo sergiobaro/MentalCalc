@@ -1,6 +1,6 @@
 import Foundation
 
-struct MainOption: Identifiable {
+struct Option: Identifiable {
 
   var id: String {
     title
@@ -10,9 +10,9 @@ struct MainOption: Identifiable {
   let number: Int
 }
 
-class MainController: ObservableObject {
+class MultiplicationController: ObservableObject {
 
-  @Published var options: [MainOption]
+  @Published var options: [Option]
   @Published var generator: QuizGenerator = SimpleQuizGenerator(maxNumber: Constants.maxNumber)
   @Published var quizDisabled = true
   @Published var shuffledDisabled = true
@@ -21,10 +21,10 @@ class MainController: ObservableObject {
   private var selectedNumbers = Set<Int>()
 
   init() {
-    options = (1...Constants.maxNumber).map { MainOption(title: "\($0)", number: $0) }
+    options = (1...Constants.maxNumber).map { Option(title: "\($0)", number: $0) }
   }
 
-  func select(option: MainOption) {
+  func select(option: Option) {
     if selectedNumbers.contains(option.number) {
       selectedNumbers.remove(option.number)
     } else {

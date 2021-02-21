@@ -3,7 +3,7 @@ import Multiplication
 
 struct MentalCalcView: View {
   var body: some View {
-    MainView()
+    MultiplicationView()
   }
 }
 
