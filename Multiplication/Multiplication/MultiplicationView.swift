@@ -57,18 +57,20 @@ public struct MultiplicationView: View {
             .disabled(controller.shuffledDisabled)
 
           Spacer()
-
-          NavigationLink(
-            destination: TableView(controller: TableController(generator: controller.generator)),
-            label: {
-              Text("Table")
-                .font(.title)
-            })
-            .disabled(controller.tableDisabled)
-
-          Spacer()
         }
         .padding()
+
+        HStack {
+          Spacer()
+          NavigationLink(
+            destination: FullTable(controller: FullTableController()),
+            label: {
+              Text("Times Table")
+                .font(.title)
+            }
+          )
+          Spacer()
+        }
 
         Spacer()
       }
