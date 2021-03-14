@@ -23,13 +23,15 @@ struct FullTable: View {
   var body: some View {
     ScrollView(.horizontal) {
       LazyVGrid(columns: columns) {
-
         ForEach(controller.items) { item in
           Text(item.text)
             .frame(width: 50.0, height: 50.0, alignment: .center)
-            .foregroundColor(item.highlight ? Color.white : Color.black)
-            .background(item.highlight ? Color.gray : Color.clear)
+            .foregroundColor(textColor(item: item))
+            .background(backgroundColor(item: item))
             .border(Color.black, width: 0.5)
+            .onTapGesture {
+              controller.tapItem(item)
+            }
         }
       }
       .border(Color.black)
@@ -37,6 +39,26 @@ struct FullTable: View {
 
       Spacer()
     }
+  }
+
+  private func textColor(item: FullTableItem) -> Color {
+    if item.isSelected {
+      return Color.white
+    }
+    return Color.black
+  }
+
+  private func backgroundColor(item: FullTableItem) -> Color {
+    if item.isHighlighted && item.isSelected {
+      return Color.blue.opacity(0.8)
+    }
+    if item.isHighlighted {
+      return Color.gray.opacity(0.2)
+    }
+    if item.isSelected {
+      return Color.blue.opacity(0.5)
+    }
+    return Color.white
   }
 }
 
