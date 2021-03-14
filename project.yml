@@ -13,6 +13,9 @@ targets:
     scheme:
       testTargets:
         - MultiplicationTests
+    postCompileScripts:
+      - script: swiftlint
+        name: Swiftlint
   Multiplication:
     platform: iOS
     type: framework

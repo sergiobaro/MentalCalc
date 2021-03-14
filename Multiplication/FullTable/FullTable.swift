@@ -1,6 +1,6 @@
- import SwiftUI
+import SwiftUI
 
- struct FullTable: View {
+struct FullTable: View {
 
   @ObservedObject var controller: FullTableController
 
@@ -38,10 +38,10 @@
       Spacer()
     }
   }
- }
+}
 
- struct FullTable_Previews: PreviewProvider {
+struct FullTable_Previews: PreviewProvider {
   static var previews: some View {
     FullTable(controller: FullTableController())
   }
- }
+}

@@ -25,12 +25,12 @@ class FullTableController: ObservableObject {
     }
     items.append(contentsOf: firstRow)
 
-    for i in 1...12 {
+    for index in 1...12 {
       let row: [FullTableItem] = (1...12).map {
-        let text = String($0 * i)
-        return FullTableItem(text: text, highlight: i == $0)
+        let text = String($0 * index)
+        return FullTableItem(text: text, highlight: index == $0)
       }
-      let rowHeader = FullTableItem(text: String(i), highlight: true)
+      let rowHeader = FullTableItem(text: String(index), highlight: true)
       items.append(contentsOf: [rowHeader] + row)
     }
 
