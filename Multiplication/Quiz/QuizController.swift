@@ -9,7 +9,9 @@ class QuizController: ObservableObject {
   @Published var borderColor: Color = .black
   @Published var correct: Int = 0
   @Published var errors: Int = 0
+  @Published var lastQuestions: [String] = []
 
+  private var first: Bool = true
   private let generator: QuizGenerator
   private var currentQuestion: QuizQuestion
 
@@ -26,6 +28,12 @@ class QuizController: ObservableObject {
     borderColor = .black
     inputText = ""
     solutionText = "Show Solution"
+    if first {
+      first = false
+      lastQuestions = []
+    } else {
+      lastQuestions = lastQuestions.suffix(4) + [currentQuestion.text]
+    }
     currentQuestion = generator.generate(previous: currentQuestion)
     questionText = currentQuestion.questionText
   }
@@ -48,6 +56,7 @@ class QuizController: ObservableObject {
   func reset() {
     correct = 0
     errors = 0
+    first = true
     next()
   }
 }

@@ -10,7 +10,7 @@ struct ShuffledQuestionView: View {
       Spacer()
       Text(question.question.questionText)
       Text(question.inputText)
-        .frame(width: 100, height: 35)
+        .frame(width: 80, height: 35)
         .background(
           RoundedRectangle(cornerRadius: 6, style: .continuous)
             .stroke(question.borderColor, lineWidth: question.borderWidth)

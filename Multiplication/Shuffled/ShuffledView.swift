@@ -18,6 +18,7 @@ struct ShuffledView: View {
           .frame(maxWidth: .infinity)
         }
       }
+      .padding(.top, 10)
 
       Spacer()
 
@@ -27,6 +28,7 @@ struct ShuffledView: View {
     .onAppear(perform: {
       self.controller.onAppear()
     })
+    .navigationBarTitle("Shuffled", displayMode: .inline)
   }
 }
 

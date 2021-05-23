@@ -13,6 +13,10 @@ public struct QuizQuestion {
     "\(left) x \(right) ="
   }
 
+  public var text: String {
+    "\(questionText) \(result)"
+  }
+
   public init(left: Int, right: Int) {
     self.left = left
     self.right = right
