@@ -32,7 +32,7 @@ class QuizController: ObservableObject {
       first = false
       lastQuestions = []
     } else {
-      lastQuestions = lastQuestions.suffix(4) + [currentQuestion.text]
+      lastQuestions = [currentQuestion.text]
     }
     currentQuestion = generator.generate(previous: currentQuestion)
     questionText = currentQuestion.questionText
