@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct MultiplicationView: View {
-
+  private let storage = MemoryStorage()
   @ObservedObject var controller: MultiplicationController
 
   private let columns = [
@@ -39,7 +39,7 @@ public struct MultiplicationView: View {
           Spacer()
 
           NavigationLink(
-            destination: QuizView(controller: QuizController(generator: controller.generator)),
+            destination: QuizView(controller: QuizController(generator: controller.generator, storage: storage)),
             label: {
               Text("Quiz")
                 .font(.title)
@@ -49,7 +49,9 @@ public struct MultiplicationView: View {
           Spacer()
 
           NavigationLink(
-            destination: ShuffledView(controller: ShuffledController(generator: controller.generator)),
+            destination: ShuffledView(
+              controller: ShuffledController(generator: controller.generator, storage: storage)
+            ),
             label: {
               Text("Shuffled")
                 .font(.title)
@@ -63,9 +65,17 @@ public struct MultiplicationView: View {
         HStack {
           Spacer()
           NavigationLink(
-            destination: FullTable(controller: FullTableController()),
+            destination: FullTableView(controller: FullTableController()),
             label: {
               Text("Times Table")
+                .font(.title)
+            }
+          )
+          Spacer()
+          NavigationLink(
+            destination: RecordsView(controller: RecordsController(storage: storage)),
+            label: {
+              Text("Quiz Records")
                 .font(.title)
             }
           )

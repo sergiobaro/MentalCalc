@@ -16,12 +16,14 @@ struct ShuffledQuestion: Identifiable {
 class ShuffledController: ObservableObject {
 
   private let generator: QuizGenerator
+  private let storage: Storage
   private var quizQuestions = [QuizQuestion]()
   private var focusedQuestionIndex = 0
   @Published var questions = [ShuffledQuestion]()
 
-  init(generator: QuizGenerator) {
+  init(generator: QuizGenerator, storage: Storage) {
     self.generator = generator
+    self.storage = storage
   }
 
   func onAppear() {

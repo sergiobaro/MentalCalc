@@ -13,10 +13,12 @@ class QuizController: ObservableObject {
 
   private var first: Bool = true
   private let generator: QuizGenerator
+  private let storage: Storage
   private var currentQuestion: QuizQuestion
 
-  init(generator: QuizGenerator) {
+  init(generator: QuizGenerator, storage: Storage) {
     self.generator = generator
+    self.storage = storage
     self.currentQuestion = generator.generate()
   }
 
@@ -41,9 +43,11 @@ class QuizController: ObservableObject {
   func check() {
     if currentQuestion.result == Int(inputText) {
       correct += 1
+      storage.save(question: currentQuestion, correct: true)
       next()
     } else {
       errors += 1
+      storage.save(question: currentQuestion, correct: false)
       borderColor = .red
     }
   }

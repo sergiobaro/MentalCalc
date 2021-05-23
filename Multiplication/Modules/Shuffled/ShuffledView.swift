@@ -40,7 +40,8 @@ struct ShuffledView_Previews: PreviewProvider {
           generator: SelectionTableQuizGenerator(
             maxNumber: Constants.maxNumber,
             numbers: Set<Int>(arrayLiteral: 1)
-          )
+          ),
+          storage: RandomStorage()
         )
       )
     }

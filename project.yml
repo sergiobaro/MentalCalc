@@ -4,6 +4,11 @@ options:
   indentWidth: 2
   tabWidth: 2
 
+packages:
+  Nimble:
+    url: https://github.com/Quick/Nimble
+    from: 9.2.0
+
 targets:
   MentalCalc:
     platform: iOS
@@ -40,5 +45,6 @@ targets:
       PRODUCT_BUNDLE_IDENTIFIER: com.sbs.MultiplicationTests
     dependencies:
       - target: MultiplicationTests
+      - package: Nimble
     scheme:
       gatherCoverageData: true

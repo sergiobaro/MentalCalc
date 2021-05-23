@@ -10,14 +10,14 @@ public struct SelectionTableQuizGenerator: QuizGenerator {
     self.numbers = numbers
   }
 
-  public func generate() -> QuizQuestion {
+  func generate() -> QuizQuestion {
     QuizQuestion(
       left: numbers.randomElement() ?? Int.random(in: 1...maxNumber),
       right: Int.random(in: 1...maxNumber)
     )
   }
 
-  public func generateAll() -> [QuizQuestion] {
+  func generateAll() -> [QuizQuestion] {
     var questions = [QuizQuestion]()
 
     for right in 1...maxNumber {

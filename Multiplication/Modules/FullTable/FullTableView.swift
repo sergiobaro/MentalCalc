@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FullTable: View {
+struct FullTableView: View {
 
   @ObservedObject var controller: FullTableController
 
@@ -39,6 +39,7 @@ struct FullTable: View {
 
       Spacer()
     }
+    .navigationBarTitle("", displayMode: .inline)
   }
 
   private func textColor(item: FullTableItem) -> Color {
@@ -64,6 +65,6 @@ struct FullTable: View {
 
 struct FullTable_Previews: PreviewProvider {
   static var previews: some View {
-    FullTable(controller: FullTableController())
+    FullTableView(controller: FullTableController())
   }
 }
