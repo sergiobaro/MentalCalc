@@ -12,16 +12,16 @@ public struct SelectionTableQuizGenerator: QuizGenerator {
 
   public func generate() -> QuizQuestion {
     QuizQuestion(
-      left: Int.random(in: 1...maxNumber),
-      right: numbers.randomElement() ?? Int.random(in: 1...maxNumber)
+      left: numbers.randomElement() ?? Int.random(in: 1...maxNumber),
+      right: Int.random(in: 1...maxNumber)
     )
   }
 
   public func generateAll() -> [QuizQuestion] {
     var questions = [QuizQuestion]()
 
-    for left in 1...maxNumber {
-      for right in numbers {
+    for right in 1...maxNumber {
+      for left in numbers {
         let question = QuizQuestion(left: left, right: right)
         questions.append(question)
       }
